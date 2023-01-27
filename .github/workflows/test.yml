@@ -27,7 +27,6 @@ jobs:
       - name: Test Git cmds
         run: |
           export $PATH
-          #git describe --tags
-          #git log -n 1 --pretty=format:%h
+          git --version
 
  
