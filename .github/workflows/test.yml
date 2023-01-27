@@ -26,10 +26,7 @@ jobs:
       # Runs a single command using the runners shell
       - name: Test Git cmds
         run: |
-          echo Test!
-          pwd
-          ls -l .
-          which git
+          export $PATH
           #git describe --tags
           #git log -n 1 --pretty=format:%h
 
