@@ -29,5 +29,4 @@ jobs:
       - name: Copy files to the test website with the AWS CLI
         run: |
           echo $REPO_NAME
-          echo $BRANCH
-          echo ${{ github.ref_name }}        
+          echo $BRANCH     
