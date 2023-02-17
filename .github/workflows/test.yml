@@ -29,5 +29,4 @@ jobs:
 
       - name: Copy files to the test website with the AWS CLI
         run: |
-          echo $REPO_NAME
-          echo $BRANCH     
+          echo aws s3 cp templates s3://bootstrap-awss3cloudformationbucket-xxxyyy/$REPO_NAME/$BRANCH_OR_TAG/ --recursive   
