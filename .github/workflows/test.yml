@@ -17,18 +17,17 @@ env:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
+    name: Uploads to S3
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout
       - uses: actions/checkout@v3
 
-    - name: Copy files to the test website with the AWS CLI
-      run: |
-        echo $REPO_NAME
-        echo $BRANCH
-        echo ${{ github.ref_name }}        
+      - name: Copy files to the test website with the AWS CLI
+        run: |
+          echo $REPO_NAME
+          echo $BRANCH
+          echo ${{ github.ref_name }}        
