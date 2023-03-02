@@ -27,7 +27,7 @@ jobs:
   deploy_prod:
     name: Uploads to S3
     runs-on: ubuntu-latest
-    if: ${{ github.ref == 'refs/heads/main' }}
+    if: ${{ github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v') }}
     needs: validate
 
     # Steps represent a sequence of tasks that will be executed as part of the job
