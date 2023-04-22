@@ -1,0 +1,40 @@
+name: CI-APP2
+
+# Controls when the workflow will run
+on:
+  push:
+    branches:
+      - production
+      - staging
+      - main
+    paths:
+      - "apps/app2/**"
+jobs:
+  build-and-deploy:
+    name: build-and-deploy
+    runs-on: ubuntu-latest
+    steps:
+      # if in staging branch set then bucket name to staging bucket
+      - name: setup-outputbucket-staging
+        if: github.ref == 'refs/heads/staging'
+        run: |
+          echo 'BUCKET_NAME=staging.bucket.app2' >> $GITHUB_ENV
+      # if in production branch then set bucket name to production bucket
+      - name: setup-outputbucket-prod
+        if: github.ref == 'refs/heads/production'
+        run: |
+          echo 'BUCKET_NAME=prod.bucket.app2' >> $GITHUB_ENV
+      # if in main branch then bucket name is empty
+      # checkout and build
+      - name: checkout
+        uses: actions/checkout@v3.0.0
+      - name: build
+        run: echo Building and testing...
+      - name: deploy
+        if: env.BUCKET_NAME != ''
+        run: echo Deploying to $BUCKET_NAME
+
+
+
+
+
