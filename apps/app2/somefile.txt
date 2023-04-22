@@ -1,1 +1,2 @@
-Should not trigger a job since apps/app2
+Should now trigger a job to build app2 but not deploy it...
+
