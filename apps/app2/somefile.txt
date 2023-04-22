@@ -1,2 +1,2 @@
-Should now trigger a job to build app2 but not deploy it...
+A PR to app2 going to main
 
