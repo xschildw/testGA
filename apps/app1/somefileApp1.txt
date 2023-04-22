@@ -1,1 +1,1 @@
-should trigger a job, no deploy step
+should trigger a job, with deploy to staging
