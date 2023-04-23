@@ -9,6 +9,7 @@ on:
       - main
     paths:
       - "apps/app1/**"
+      - "common/**"
 jobs:
   build-and-deploy:
     name: build-and-deploy
