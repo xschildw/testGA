@@ -1,0 +1,4 @@
+#!/bin/bash
+echo BRANCH_NAME $BRANCH_NAME
+echo REPO_NAME $REPO_NAME
+

@@ -1,0 +1,26 @@
+name: CI-APP3
+
+# Controls when the workflow will run
+on:
+  push:
+    branches:
+      - production
+      - staging
+      - main
+    paths:
+      - "apps/app3/**"
+      - "apps/common/**"
+jobs:
+  test_env_vars:
+    name: build-and-deploy
+    runs-on: ubuntu-latest
+    steps:
+      name: test
+        BRANCH_NAME=${{ github.ref_name }}
+        REPO_NAME=${{ github.event.repository.name }}
+      run: |
+        chmod +x ./test_env_vars.sh
+        ./test_env_vars.sh
+
+
+
