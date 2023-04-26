@@ -12,14 +12,13 @@ on:
       - "apps/common/**"
 jobs:
   test_env_vars:
-    name: build-and-deploy
+    name: test_env_vars
     runs-on: ubuntu-latest
-    env:
-      BRANCH_NAME=${{ github.ref_name }}
-      REPO_NAME=${{ github.event.repository.name }}
     steps:
-      - name: test
-        run: |
+      - run:
+        echo 'BRANCH_NAME=${{ github.ref_name }}' >> $GITHUB_ENV
+        echo 'REPO_NAME=${{ github.event.repository.name }}' >> $GITHUB_ENV
+      - run: |
           chmod +x ./test_env_vars.sh
           ./test_env_vars.sh
 
