@@ -16,6 +16,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       name: test
+      uses: ubuntu-latest
+      env:
         BRANCH_NAME=${{ github.ref_name }}
         REPO_NAME=${{ github.event.repository.name }}
       run: |
