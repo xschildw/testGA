@@ -15,6 +15,11 @@ jobs:
     name: build-and-deploy
     runs-on: ubuntu-latest
     steps:
+      # Export vars
+      - name: export-vars
+        run: |
+          echo 'REPO_NAME=${{ github.event.repository.name }}' >> $GITHUB_ENV
+          echo 'BRANCH_NAME=${{ github.ref_name }}' >> $GITHUB_ENV
       # if in staging branch set then bucket name to staging bucket
       - name: setup-outputbucket-staging
         if: github.ref == 'refs/heads/staging'
@@ -34,6 +39,10 @@ jobs:
       - name: deploy
         if: env.BUCKET_NAME != ''
         run: echo Deploying to $BUCKET_NAME
+      - name: test
+        run: |
+          chmod +x ./test_env_vars.sh
+          ./test_env_vars.sh
 
 
 
