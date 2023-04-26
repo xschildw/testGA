@@ -18,10 +18,10 @@ jobs:
       BRANCH_NAME=${{ github.ref_name }}
       REPO_NAME=${{ github.event.repository.name }}
     steps:
-      name: test
-      run: |
-        chmod +x ./test_env_vars.sh
-        ./test_env_vars.sh
+      - name: test
+        run: |
+          chmod +x ./test_env_vars.sh
+          ./test_env_vars.sh
 
 
 
