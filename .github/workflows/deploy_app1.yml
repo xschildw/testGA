@@ -1,18 +1,17 @@
 name: CI-APP1
 
-# Controls when the workflow will run
 on:
   push:
     branches:
-      - production
-      - staging
+      - releases/app1/production
+      - releases/app1/staging
       - main
     paths:
-      - "apps/app1/**"
-      - "apps/common/**"
+      - 'apps/app1/**'
+      - 'common/**'
 jobs:
-  build-and-deploy:
-    name: build-and-deploy
+  build-and-deploy-app1:
+    name: build-and-deploy-app1
     runs-on: ubuntu-latest
     steps:
       # Export vars
@@ -22,29 +21,32 @@ jobs:
           echo 'BRANCH_NAME=${{ github.ref_name }}' >> $GITHUB_ENV
       # if in staging branch set then bucket name to staging bucket
       - name: setup-outputbucket-staging
-        if: github.ref == 'refs/heads/staging'
+        if: github.ref == 'refs/heads/releases/app1/staging'
         run: |
           echo 'BUCKET_NAME=staging.bucket' >> $GITHUB_ENV
       # if in production branch then set bucket name to production bucket
       - name: setup-outputbucket-prod
-        if: github.ref == 'refs/heads/production'
+        if: github.ref == 'refs/heads/releases/app1/production'
         run: |
           echo 'BUCKET_NAME=prod.bucket' >> $GITHUB_ENV
       # if in main branch then bucket name is empty
-      # checkout and build
+      # - uses: dorny/paths-filter@v2
+      #   id: changes
+      #   with:
+      #     filters: |
+      #       common:
+      #         - 'common/**'
+      #       app1:
+      #         - 'apps/app1'
       - name: checkout
         uses: actions/checkout@v3.0.0
-      - name: build
-        run: echo Building and testing...
+      # build common
+      - name: build_common
+        run: echo Building common...
+      # build app1
+      - name: build_app1
+#        if: steps.filter.output.app1 == 'true'
+        run: echo Building and testing app1...
       - name: deploy
         if: env.BUCKET_NAME != ''
         run: echo Deploying to $BUCKET_NAME
-      - name: test
-        run: |
-          chmod +x ./test_env_vars.sh
-          ./test_env_vars.sh
-
-
-
-
-

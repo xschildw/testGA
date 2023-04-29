@@ -4,12 +4,12 @@ name: CI-APP2
 on:
   push:
     branches:
-      - production
-      - staging
+      - releases/app2/production
+      - releases/app2/staging
       - main
     paths:
       - "apps/app2/**"
-      - "apps/common/**"
+      - "common/**"
 jobs:
   build-and-deploy:
     name: build-and-deploy
@@ -17,12 +17,12 @@ jobs:
     steps:
       # if in staging branch set then bucket name to staging bucket
       - name: setup-outputbucket-staging
-        if: github.ref == 'refs/heads/staging'
+        if: github.ref == 'refs/heads/releases/app2/staging'
         run: |
           echo 'BUCKET_NAME=staging.bucket.app2' >> $GITHUB_ENV
       # if in production branch then set bucket name to production bucket
       - name: setup-outputbucket-prod
-        if: github.ref == 'refs/heads/production'
+        if: github.ref == 'refs/heads/releases/app2/production'
         run: |
           echo 'BUCKET_NAME=prod.bucket.app2' >> $GITHUB_ENV
       # if in main branch then bucket name is empty
