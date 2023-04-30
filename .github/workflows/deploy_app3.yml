@@ -12,8 +12,6 @@ on:
 jobs:
   changes:
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: read
     outputs:
       site1: ${{ steps.filter.outputs.site1 }}
       site2: ${{ steps.filter.outputs.site2 }}
