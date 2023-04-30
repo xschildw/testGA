@@ -20,12 +20,12 @@ jobs:
         run: echo Building common...
       - name: deploy-app3-site1-staging
         if: |
-          {{ github.ref == 'refs/heads/releases/app3/staging' }}
+          github.ref == 'refs/heads/releases/app3/staging'
         run: |
           echo Building app3 and deploy to staging
       - name: setup-outputbucket-prod
         if: |
-          {{ github.ref == 'refs/heads/releases/app3/production' }}
+          github.ref == 'refs/heads/releases/app3/production'
         run: |
           echo Building app3 and deploy to production
       # if in main branch
