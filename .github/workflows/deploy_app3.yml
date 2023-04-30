@@ -53,4 +53,28 @@ jobs:
         if: github.ref == 'refs/heads/main'
         run: |
           echo  Building app3-site1 
+  build-and-deploy-site2:
+    name: build-and-deploy-site2
+    runs-on: ubuntu-latest
+    needs: changes
+    if: ${{ needs.changes.outputs.site2 == 'true' }}
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3.0.0
+      - name: build_common
+        run: echo Building common...
+      - name: build-app3-site2-staging
+        if: github.ref == 'refs/heads/releases/app3/staging'
+        run: |
+          echo Building app3-site2
+          echo Deploying app3-site2 to staging
+      - name: build-app3-site2-production
+        if: github.ref == 'refs/heads/releases/app3/production'
+        run: |
+          echo Building app3-site2
+          echo Deploying app3-site2 to production
+      - name: test
+        if: github.ref == 'refs/heads/main'
+        run: |
+          echo  Building app3-site2 
 
