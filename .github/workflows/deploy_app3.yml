@@ -12,27 +12,24 @@ on:
 jobs:
   build-and-deploy:
     name: build-and-deploy
-    # limit to this repository
     runs-on: ubuntu-latest
     steps:
       - name: checkout
         uses: actions/checkout@v3.0.0
       - name: build_common
         run: echo Building common...
-      # if in staging branch 
       - name: deploy-app3-site1-staging
         if: |
-          {{ github.ref == 'refs/heads/releases/app3/staging' }}
+          github.ref == 'refs/heads/releases/app3/staging'
         run: |
           echo Building app3 and deploy to staging
-      # if in production branch
       - name: setup-outputbucket-prod
         if: |
-          {{ github.ref == 'refs/heads/releases/app3/production' }}
+          github.ref == 'refs/heads/releases/app3/production'
         run: |
           echo Building app3 and deploy to production
       # if in main branch
-      -name: test
+      - name: test
         if: github.ref == 'refs/heads/main'
         run: |
           echo  Building app3    
