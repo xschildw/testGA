@@ -1,0 +1,35 @@
+name: CI-SITE1
+
+on:
+  push:
+    branches:
+      - releases/app3/production
+      - releases/app3/staging
+      - main
+    paths:
+      - 'apps/app3/site1/**'
+      - 'common/**'
+      - 'someconfig.json'
+jobs:
+  build-and-deploy-site1:
+    name: build-and-deploy-site1
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3.0.0
+      - name: build_common
+        run: echo Building common on ${{ github.ref }}...
+      - name: build-app3-site1-staging
+        if: github.ref == 'refs/heads/releases/app3/staging'
+        run: |
+          echo Building app3-site1
+          echo Deploying app3-site1 to staging
+      - name: build-app3-site1-production
+        if: github.ref == 'refs/heads/releases/app3/production'
+        run: |
+          echo Building app3-site1
+          echo Deploying app3-site1 to production
+      - name: test
+        if: github.ref == 'refs/heads/main'
+        run: |
+          echo  Building app3-site1 
