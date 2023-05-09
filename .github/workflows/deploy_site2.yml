@@ -9,7 +9,7 @@ on:
     paths:
       - 'apps/app3/site2/**'
       - 'common/**'
-      - 'README.MD'
+      - 'someconfig.json'
 jobs:
   build-and-deploy-site1:
     name: build-and-deploy-site2
