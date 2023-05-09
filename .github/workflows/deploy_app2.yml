@@ -9,6 +9,7 @@ on:
     paths:
       - "apps/app2/**"
       - "common/**"
+      - "someconfig.json"
 jobs:
   build-and-deploy:
     name: build-and-deploy
