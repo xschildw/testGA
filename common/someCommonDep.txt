@@ -1,4 +1,26 @@
-Add something, should cause deploy of both app1 and app2
-Another try
-Another try
-An update 
+Make a change to common in main branch
+# from dw
+with nsr(id, rn, ts) as (
+    select ns.ID, row_number() over (partition by ns.ID order by TIMESTAMP desc) as rn, ns.TIMESTAMP
+    from NODE_SNAPSHOT ns
+    where ns.NODE_TYPE='file'
+),
+    dns(id) as (
+    select distinct ID
+    from DELETED_NODE_SNAPSHOT
+)
+select count(*)
+from nsr
+where nsr.rn=1
+    and nsr.id not in (select id from dns)
+;
+#29586183
+#29217815 added DELETED_NODE_SNAPSHOT
+# from DB
+select count(*)
+from NODE
+where NODE_TYPE='file'
+;
+30652530
+
+a change to common

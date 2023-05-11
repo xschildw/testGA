@@ -1,4 +1,4 @@
-name: CI-APP3
+name: CI-SITE1
 
 on:
   push:
@@ -8,37 +8,19 @@ on:
       - main
     paths:
       - 'apps/app3/**'
+      - '!apps/app3/src/configurations/**'
+      - 'apps/app3/src/configurations/site1/**'
       - 'common/**'
+      - 'someconfig.json'
 jobs:
-  changes:
-    runs-on: ubuntu-latest
-    permissions:
-      pull-requests: read
-    outputs:
-      site1: ${{ steps.filter.outputs.site1 }}
-      site2: ${{ steps.filter.outputs.site2 }}
-    steps:
-      - uses: actions/checkout@v3.0.0
-      - uses: dorny/paths-filter@v2
-        id: filter
-        with:
-          filters: |
-            site1:
-              - 'apps/app3/src/configurations/site1/**'
-            site2:
-              - 'apps/app3/src/configurations/site2/**'
-            site3:
-              - 'apps/app3/src/configurations/site3/**'
   build-and-deploy-site1:
     name: build-and-deploy-site1
     runs-on: ubuntu-latest
-    needs: changes
-    if: ${{ needs.changes.outputs.site1 == 'true' }}
     steps:
       - name: checkout
         uses: actions/checkout@v3.0.0
       - name: build_common
-        run: echo Building common...
+        run: echo Building common on ${{ github.ref }}...
       - name: build-app3-site1-staging
         if: github.ref == 'refs/heads/releases/app3/staging'
         run: |
@@ -53,4 +35,3 @@ jobs:
         if: github.ref == 'refs/heads/main'
         run: |
           echo  Building app3-site1 
-
