@@ -7,8 +7,8 @@ on:
       - releases/app2/staging
       - main
     paths:
-      - 'apps/app2/**''
-      - 'common/**''
+      - 'apps/app2/**'
+      - 'common/**'
       - 'someconfig.json'
 jobs:
   build-and-deploy:
