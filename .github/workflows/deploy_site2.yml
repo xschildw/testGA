@@ -7,7 +7,9 @@ on:
       - releases/app3/staging
       - main
     paths:
-      - 'apps/app3/site2/**'
+      - 'apps/app3/**'
+      - '!apps/app3/src/configurations/**'
+      - 'apps/app3/src/configurations/site2/**'
       - 'common/**'
       - 'someconfig.json'
 jobs:
