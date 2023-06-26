@@ -1,0 +1,28 @@
+name: Deploy with tag
+
+on:
+  workflow_dispatch:
+    inputs:
+      portal-name:
+        type: choice
+        description: Which portal to deploy
+        options: 
+        - adknowledgportal
+        - challengeportal
+      tag:
+        required: true
+        type: string
+  
+jobs:
+  build-and-deploy:
+    name: build-and-deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3.0.0
+        with:
+          ref: ${{ inputs.tag }}
+      - name: deploy
+        run: |
+          git status
+          echo Deploy...
