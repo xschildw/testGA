@@ -26,3 +26,4 @@ jobs:
         run: |
           git status
           echo Deploy ${{ inputs.portal-name }} at ${{ inputs.tag }}...
+          cat README.md
