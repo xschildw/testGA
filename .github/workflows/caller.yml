@@ -1,6 +1,9 @@
 name: caller
 on:
-  workflow_dispatch  
+  workflow_dispatch
+permissions:
+  id-token: write
+  contents: read
 jobs:
   caller:
     uses: ./.github/workflows/called.yml
